@@ -1,0 +1,193 @@
+/**
+ * Tailwind CSS Entry Point
+ * 
+ * Order matters:
+ * 1. Import tokens first (CSS variables)
+ * 2. Tailwind base (reset + normalize)
+ * 3. Tailwind components
+ * 4. Tailwind utilities
+ * 5. Custom base styles
+ */
+
+/* Import design tokens */
+@import './tokens.css';
+
+/* Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+ * BASE LAYER - Global Defaults
+ * Apply semantic tokens for consistent theming
+ * ============================================ */
+@layer base {
+  /* Document defaults */
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  body {
+    @apply font-sans;
+    background-color: var(--bg-canvas);
+    color: var(--text-neutral-strong);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+  }
+  
+  /* Headings - apply semantic typography */
+  h1 {
+    @apply text-h1-bold text-content-neutral-strong;
+  }
+  
+  h2 {
+    @apply text-h2-bold text-content-neutral-strong;
+  }
+  
+  h3 {
+    @apply text-h3-bold text-content-neutral-strong;
+  }
+  
+  h4 {
+    @apply text-h4-bold text-content-neutral-strong;
+  }
+  
+  h5 {
+    @apply text-h5-bold text-content-neutral-strong;
+  }
+  
+  h6 {
+    @apply text-h5-semibold text-content-neutral-strong;
+  }
+  
+  /* Paragraphs */
+  p {
+    @apply text-body-regular;
+  }
+  
+  /* Links */
+  a {
+    @apply text-content-primary;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Strong/Bold */
+  strong,
+  b {
+    @apply font-bold;
+  }
+  
+  /* Focus visible (accessibility) */
+  *:focus-visible {
+    outline: 2px solid var(--border-primary);
+    outline-offset: 2px;
+  }
+  
+  /* Selection */
+  ::selection {
+    background-color: var(--bg-primary-light);
+    color: var(--text-on-action-primary-light);
+  }
+  
+  /* Scrollbar (webkit) */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--bg-canvas);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-neutral);
+    border-radius: var(--radius-full);
+    border: 2px solid var(--bg-canvas);
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-neutral);
+  }
+}
+
+/* ============================================
+ * COMPONENT LAYER - Reusable Patterns
+ * ============================================ */
+@layer components {
+  /* Focus ring utility */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg-canvas;
+  }
+  
+  /* Disabled state utility */
+  .disabled-state {
+    @apply opacity-60 cursor-not-allowed pointer-events-none;
+  }
+  
+  /* Card base */
+  .card-base {
+    @apply bg-bg-surface border border-border-surface rounded-lg;
+  }
+  
+  /* Button base */
+  .btn-base {
+    @apply inline-flex items-center justify-center rounded-lg transition-colors duration-200 focus-ring;
+  }
+  
+  /* Input base */
+  .input-base {
+    @apply w-full px-3 py-2 bg-bg-surface border border-border-surface rounded-lg text-body-regular text-content-neutral-strong placeholder:text-content-neutral-light focus:outline-none focus:ring-2 focus:ring-border-primary focus:border-transparent disabled:bg-bg-disable disabled:text-content-disable disabled:cursor-not-allowed;
+  }
+}
+
+/* ============================================
+ * UTILITY LAYER - Custom Utilities
+ * ============================================ */
+@layer utilities {
+  /* Hide scrollbar but keep scrollable */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Gradient text */
+  .text-gradient-blue {
+    background: linear-gradient(to right, var(--gradient-blue-1), var(--gradient-blue-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-orange {
+    background: linear-gradient(to right, var(--gradient-orange-1), var(--gradient-orange-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Truncate text */
+  .truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
